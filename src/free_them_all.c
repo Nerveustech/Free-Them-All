@@ -63,8 +63,7 @@ ErrorOr FTA_free(FTA_Manager* queue){
         queue->tail = NULL;
     queue->head = queue->head->next;
     
-    if(check_malloc_status(temp_index))
-        free(temp_index);
+    free(temp_index);
     
     return SUCCESS;
 }
