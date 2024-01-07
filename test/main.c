@@ -21,7 +21,9 @@
 
 #include "../src/free_them_all.h"
 
-void test_case_fta_malloc(void){
+#define TEST_CASE 5
+
+int test_case_fta_malloc(void){
     printf("Testing FTA_malloc()");
     
     FTA_Manager malloc_manager = {0};
@@ -35,9 +37,10 @@ void test_case_fta_malloc(void){
     assert(is_empty(&malloc_manager));
     
     printf(" \033[32mSuccess\033[0m\n");
+    return 0;
 }
 
-void test_case_fta_add(void){
+int test_case_fta_add(void){
     printf("Testing FTA_add()");
     FTA_Manager malloc_manager = {0};
 
@@ -52,9 +55,10 @@ void test_case_fta_add(void){
     assert(is_empty(&malloc_manager));
 
     printf(" \033[32mSuccess\033[0m\n");
+    return 0;
 }
 
-void test_case_fta_free(void){
+int test_case_fta_free(void){
     printf("Testing FTA_free()");
     FTA_Manager malloc_manager = {0};
 
@@ -68,9 +72,10 @@ void test_case_fta_free(void){
     assert(is_empty(&malloc_manager));
 
     printf(" \033[32mSuccess\033[0m\n");
+    return 0;
 }
 
-void test_case_fta_free_address(void){
+int test_case_fta_free_address(void){
     printf("Testing FTA_free_address");
     FTA_Manager malloc_manager = {0};
     
@@ -85,9 +90,10 @@ void test_case_fta_free_address(void){
     assert(is_empty(&malloc_manager));
 
     printf(" \033[32mSuccess\033[0m\n");
+    return 0;
 }
 
-void test_case_free_them_all(void){
+int test_case_free_them_all(void){
     printf("Testing free_them_all()");
     FTA_Manager malloc_manager = {0};
     
@@ -99,18 +105,30 @@ void test_case_free_them_all(void){
     assert(is_empty(&malloc_manager));
 
     printf(" \033[32mSuccess\033[0m\n");
+    return 0;
+}
+
+int check_test_result(void){
+    int test_success = 0;
+
+    if(test_case_fta_malloc() == 0) test_success++;
+    if(test_case_fta_add() == 0) test_success++;
+    if(test_case_fta_free() == 0) test_success++;
+    if(test_case_fta_free_address() == 0) test_success++;
+    if(test_case_free_them_all() == 0) test_success++;
+    
+    return test_success;
 }
 
 int main(void){
+    int test_success = 0;
+
     printf("\nTesting Free Them All:\n\n");
     
-    test_case_fta_malloc();
-    test_case_fta_add();
-    test_case_fta_free();
-    test_case_fta_free_address();
-    test_case_free_them_all();
+    test_success = check_test_result();
     
-    printf("\n All Done!!!\n");
+    printf("\n\nTest:[%d] Result:[%d]\n", TEST_CASE, test_success);
+    printf("All Done!!!\n");
 
     return 0;
 }
