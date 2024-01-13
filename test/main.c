@@ -21,7 +21,7 @@
 
 #include "../src/free_them_all.h"
 
-#define TEST_CASE 5
+#define TEST_CASE 6
 
 int test_case_fta_malloc(void){
     printf("Testing FTA_malloc()");
@@ -35,6 +35,25 @@ int test_case_fta_malloc(void){
     
     free_them_all(&malloc_manager);
     assert(is_empty(&malloc_manager));
+    
+    printf(" \033[32mSuccess\033[0m\n");
+    return 0;
+}
+
+int test_case_fta_calloc(void){
+    printf("Testing FTA_calloc()");
+
+    FTA_Manager calloc_manager = {0};
+    
+    int* num_test = (int*)FTA_calloc(&calloc_manager, 10, sizeof(int), 1);
+    assert(check_malloc_status(num_test) == true);
+    
+    for(int i = 0; i < 10; i++){
+        assert(num_test[i] == 0);
+    }
+
+    free_them_all(&calloc_manager);
+    assert(is_empty(&calloc_manager));
     
     printf(" \033[32mSuccess\033[0m\n");
     return 0;
@@ -112,6 +131,7 @@ int check_test_result(void){
     int test_success = 0;
 
     if(test_case_fta_malloc() == 0) test_success++;
+    if(test_case_fta_calloc() == 0) test_success++;
     if(test_case_fta_add() == 0) test_success++;
     if(test_case_fta_free() == 0) test_success++;
     if(test_case_fta_free_address() == 0) test_success++;
