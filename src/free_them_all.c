@@ -32,6 +32,15 @@ void* FTA_malloc(FTA_Manager* queue, size_t size, int identifier){
     return internal_malloc_address;
 }
 
+void* FTA_calloc(FTA_Manager* queue, size_t nmemb, size_t size, int identifier){
+    void* internal_calloc_address = calloc(nmemb, size);
+    if(!check_malloc_status(internal_calloc_address)) return NULL;
+
+    FTA_add(queue, internal_calloc_address, identifier);
+    
+    return internal_calloc_address;
+}
+
 ErrorOr FTA_add(FTA_Manager* queue, void* malloc_address, int identifier){
     if(!check_malloc_status(malloc_address)) return ENOMEM;
 

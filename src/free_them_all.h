@@ -43,6 +43,7 @@ typedef struct{
 void FTA_init(FTA_Manager* queue);
 
 void* FTA_malloc(FTA_Manager* queue, size_t size, int identifier);
+void* FTA_calloc(FTA_Manager* queue, size_t nmemb, size_t size, int identifier);
 ErrorOr FTA_add(FTA_Manager* queue, void* malloc_address, int identifier);
 ErrorOr FTA_free(FTA_Manager* queue);
 ErrorOr FTA_free_address(FTA_Manager* queue, int identifier);
