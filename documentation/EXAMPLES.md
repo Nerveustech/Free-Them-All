@@ -10,10 +10,9 @@ int main(int argc, char** argv){
     char* string_ex = (char*)FTA_malloc(&malloc_manager, ((13)*sizeof(char)), 1);
     strcpy(string_ex, "Hello World");
 
-    
-    free_them_all(&malloc_manager);
-    
     printf("%s \n", string_ex);
+
+    free_them_all(&malloc_manager);
     
     return 0;
 }
